@@ -28,8 +28,14 @@ function writeConvertedCsv() {
         .split('\n')
         .slice(2)
         .filter(line => line.slice(0, 8) !== '"Student')
-      process.stdout.write(lines[lines.length - 1])
-      return fs.writeFile(convertedCsvUrl, lines.join('\n'))
+
+      const shorterLines = []
+      lines.forEach(line => {
+        const split = line.split(',')
+        const result = `${split[0]},${split[1]}, ${split[split.length - 1]}`
+        shorterLines.push(result)
+      })
+      return fs.writeFile(convertedCsvUrl, shorterLines.join('\n'))
     })
     .then(() => {
       return fs.readFile(convertedCsvUrl)
