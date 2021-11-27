@@ -1,22 +1,12 @@
 import fs from 'fs/promises'
 
-const url = new URL('./.gitignore', import.meta.url)
-
-fs.writeFile(url, '.env\nnode_modules/\n.DS_Store\n.vscode')
-  .then(() => {
-    return fs.readFile(url)
-  })
-  .then(data => {
-    // process.stdout.write(data)
-  })
-
 function writeConvertedCsv() {
   const nastyCsvUrl = new URL(
-    './assets/nasty.csv',
+    process.argv[2] || './assets/nasty.csv',
     import.meta.url
   )
   const convertedCsvUrl = new URL(
-    './assets/nasty-converted.csv',
+    `${process.argv[2]?.split('.')[0]}-converted.csv` || './assets/nasty-converted.csv',
     import.meta.url
   )
 
@@ -44,4 +34,5 @@ function writeConvertedCsv() {
       process.stdout.write(data.toString())
     })
 }
+
 writeConvertedCsv()
