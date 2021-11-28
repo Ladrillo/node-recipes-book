@@ -10,3 +10,14 @@ async function getMetadata() {
   }
 }
 getMetadata()
+
+/*
+
+// CHANGING PERMISSIONS OF FILE USING NODE
+
+const fs = require('fs')
+const file = './deploy.sh'
+
+fs.chmodSync(file, 0o777)
+
+*/
