@@ -2,11 +2,11 @@ import fs from 'fs/promises'
 
 function writeConvertedCsv() {
   const nastyCsvUrl = new URL(
-    process.argv[2] || './assets/nasty.csv',
+    './assets/nasty.csv',
     import.meta.url
   )
   const convertedCsvUrl = new URL(
-    `${process.argv[2]?.split('.')[0]}-converted.csv` || './assets/nasty-converted.csv',
+    './assets/nasty-converted.csv',
     import.meta.url
   )
 
