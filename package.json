@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon --inspect $1"
+    "start": "nodemon --inspect $1 $2"
   },
   "keywords": [],
   "author": "",
