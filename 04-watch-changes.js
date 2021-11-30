@@ -1,6 +1,7 @@
 import { watchFile } from 'fs'
 import { writeFile } from 'fs/promises'
 import { exec } from 'child_process'
+import chokidar from 'chokidar' // alternative to fs.watchFile or watch
 
 process.setUncaughtExceptionCaptureCallback(evt => {
   console.error('Nasty uncaught exception:', evt)
@@ -22,3 +23,9 @@ watchFile('package.json', { interval: 1000 }, async (current, previous) => {
     console.error(data)
   })
 })
+
+chokidar // much better than watch or watchFile
+  .watch('./04-watch-changes.js', { alwaysStat: true })
+  .on('change', (event, path) => {
+    console.log(event, path)
+  })
