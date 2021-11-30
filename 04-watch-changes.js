@@ -1,4 +1,5 @@
-import fs from 'fs'
+import { watchFile } from 'fs'
+import { writeFile } from 'fs/promises'
 import { exec } from 'child_process'
 
 process.setUncaughtExceptionCaptureCallback(evt => {
@@ -7,11 +8,11 @@ process.setUncaughtExceptionCaptureCallback(evt => {
 
 console.log('watching for changes in package.json...\n')
 
-fs.watchFile('package.json', { interval: 1000 }, (current, previous) => {
+watchFile('package.json', { interval: 1000 }, async (current, previous) => {
   console.log('package.json has changed!!\n')
 
-  fs.writeFileSync('assets/old.json', `${JSON.stringify(previous)}\n`)
-  fs.writeFileSync('assets/new.json', `${JSON.stringify(current)}\n`)
+  await writeFile('assets/old.json', `${JSON.stringify(previous)}\n`)
+  await writeFile('assets/new.json', `${JSON.stringify(current)}\n`)
 
   const chidlProcess = exec('diff assets/old.json assets/new.json')
   chidlProcess.stdout.on('data', (data) => {
