@@ -25,5 +25,5 @@ const errHandler = err => {
 }
 
 const request = http.request(opts, handler)
-  .on('error', errHandler)
+  .on('error', errHandler) // no funciona bien
   .end('lady gaga')
